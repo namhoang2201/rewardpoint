@@ -1,0 +1,78 @@
+
+.line {
+    padding: 0;
+    display: flex;
+    justify-content: space-between;
+  }
+  .title {
+    font-size: 0.875rem;
+    line-height: 1rem;
+    padding: 0.375rem 0.125rem;
+    min-height: 1.75rem;
+  }
+  .value {
+    font-size: 0.875rem;
+    font-weight: bold;
+    color: #1498d0;
+    line-height: 1rem;
+    padding: 0.375rem 0.125rem;
+    min-height: 1.75rem;
+  }
+  .ratepoint {
+    font-size: 0.875rem;
+    font-weight: bold;
+    color: #1498d0;
+    font-size: 0.875rem;
+    padding: 0.375rem 0.125rem;
+    min-height: 1.75rem;
+  }
+  .rwbar {
+    margin-top: 10px;
+    padding: 10px 0;
+  }
+  .sliderpoint {
+    padding: 10px 0;
+    margin-bottom: 20px;
+  }
+  .rwform {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.875rem;
+    line-height: 1rem;
+    padding: 0;
+    min-height: 1.75rem;
+  }
+  .rwform input {
+    font-size: 1rem;
+    padding: 2px;
+    border: 1px solid gray;
+  }
+  .rwform button {
+    border: 1px solid rgb(170, 170, 170);
+    padding: 5px 15px;
+    border-radius: 1.5rem;
+    outline: unset;
+  }
+  .cartTotal {
+  }
+  .itemtotal {
+    padding: 5px 0;
+    display: flex;
+    justify-content: space-between;
+  }
+  .label {
+    font-size: 0.875rem;
+    line-height: 1rem;
+    padding: 0.375rem 0.125rem;
+    min-height: 1.75rem;
+  }
+  .grandLabel {
+    font-size: 1rem;
+    font-weight: bold;
+  }
+  .grand {
+    font-size: 1.2rem;
+    color: rgb(192, 18, 63);
+    font-weight: bold;
+  }
+  

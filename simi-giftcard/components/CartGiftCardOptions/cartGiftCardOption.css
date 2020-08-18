@@ -1,0 +1,23 @@
+.root {
+    margin-top: 1rem;
+}
+
+.item {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 10px;
+    white-space: nowrap;
+}
+
+.title {
+    font-weight: 700;
+}
+
+.value {
+    white-space: nowrap;
+    margin-left: 5px;
+}
+
+.cartImageItem {
+
+}

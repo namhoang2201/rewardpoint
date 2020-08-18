@@ -1,0 +1,31 @@
+mutation addGiftCardProductsToCart(
+    $cartId: String!
+    $quantity: Float!
+    $sku: String! 
+    $giftcard_options: GiftCardOptionInput!
+  	$customizable_options: [CustomizableOptionInput!]
+) {
+    addGiftCardProductsToCart(
+        input: {
+            cart_id: $cartId
+            cart_items: {
+                data: { quantity: $quantity, sku: $sku }
+                giftcard_options: $giftcard_options
+              	customizable_options: $customizable_options
+            }
+        }
+    ) {
+        cart {
+            id
+            items {
+                id
+                product {
+                    id
+                    name
+                    sku
+                }
+                quantity
+            }
+        }
+    }
+}
