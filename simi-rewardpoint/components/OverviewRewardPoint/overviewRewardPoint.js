@@ -1,17 +1,12 @@
 import React from "react";
 import {Price} from '@magento/peregrine';
-import { useRestCart } from "../../talons/useRestCart";
+import { useRestCart } from "@simicart/simi-module/overwrites/talons/CartPage/useRestCart";
 import ReactLoading from '../BaseComponents/Loading/ReactLoading';
 
 const OverviewRewardPoint = (props) => {
   const talonProps = useRestCart();
   const {
-    isSignedIn,
-    cartId,
-    isLoading,
-    setLoading,
     cartData,
-    getCartDetailCustom,
     earn_point,
     spend_point,
     spend_amount,

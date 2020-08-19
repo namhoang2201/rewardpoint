@@ -1,4 +1,4 @@
-import { sendRequest } from '@simicart/simi-module/connect';
+import { sendRequest } from '../connect';
 
 export const getRestCart = (callBack, isSignedIn, cartId) => {
     if (isSignedIn) {

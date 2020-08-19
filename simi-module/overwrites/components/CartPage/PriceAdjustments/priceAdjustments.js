@@ -10,14 +10,20 @@ import ShippingMethods from '@magento/venia-ui/lib/components/CartPage/PriceAdju
 import defaultClasses from '@magento/venia-ui/lib/components/CartPage/PriceAdjustments/priceAdjustments.css';
 
 // begin custom
-import InjectComponents from '../../../../inject/injectedComponent'
-import {GIFTCARD_MODULE} from '../../../../util/checkedPlugin'
-// end custom 
+import InjectComponents from '../../../../inject/injectedComponent';
+import {
+    GIFTCARD_MODULE,
+    REWARDPOINT_MODULE,
+    checkPlugin
+} from '../../../../util/checkedPlugin';
+// end custom
 
 const PriceAdjustments = props => {
     const classes = mergeClasses(defaultClasses, props.classes);
 
-    const { setIsCartUpdating } = props;
+    const { setIsCartUpdating, updateTotal } = props;
+
+    const existModuleRewardPoint = checkPlugin(REWARDPOINT_MODULE);
 
     return (
         <div className={classes.root}>
@@ -35,10 +41,26 @@ const PriceAdjustments = props => {
                 <Section id={'gift_options'} title={'See Gift Options'}>
                     <GiftOptions />
                 </Section>
-                <InjectComponents 
+                <InjectComponents
                     module={GIFTCARD_MODULE}
                     func={'GiftCardOptionsCoupon'}
                 />
+                {existModuleRewardPoint && (
+                    <Section id={'rewardpoint'} title={'Apply Reward'}>
+                        {props.isSignedIn && (
+                            <InjectComponents
+                                module={REWARDPOINT_MODULE}
+                                func={'FormRewardPoint'}
+                                parentProps={{
+                                    onCancel: null,
+                                    isMiniCart: false,
+                                    classes: classes,
+                                    updateTotal: updateTotal
+                                }}
+                            />
+                        )}
+                    </Section>
+                )}
             </Accordion>
         </div>
     );

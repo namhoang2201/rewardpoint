@@ -7,14 +7,17 @@ import Button from '@magento/venia-ui/lib/components/Button';
 import { fullPageLoadingIndicator } from '@magento/venia-ui/lib/components/LoadingIndicator';
 
 import PriceAdjustments from './PriceAdjustments';
-import PriceSummary from '@magento/venia-ui/lib/components/CartPage/PriceSummary';
+import PriceSummary from './PriceSummary';
 import ProductListing from './ProductListing';
 import { mergeClasses } from '@magento/venia-ui/lib/classify';
 import defaultClasses from '@magento/venia-ui/lib/components/CartPage/cartPage.css';
 import { GET_CART_DETAILS } from './cartPage.gql';
+// customize
+import { useRestCart } from '../../talons/CartPage/useRestCart';
+// end customize
 
 const CartPage = props => {
-    console.log('run')
+
     const talonProps = useCartPage({
         queries: {
             getCartDetails: GET_CART_DETAILS
@@ -29,6 +32,18 @@ const CartPage = props => {
         setIsCartUpdating,
         shouldShowLoadingIndicator
     } = talonProps;
+
+    // reward customize
+    const restTalons = useRestCart();
+    const {
+        cartData,
+        getCartDetailCustom
+    } = restTalons;
+
+    const updateTotal = () => {
+        getCartDetailCustom()
+    }
+    // end customize
 
     const classes = mergeClasses(defaultClasses, props.classes);
 
@@ -53,10 +68,10 @@ const CartPage = props => {
     );
 
     const priceAdjustments = hasItems ? (
-        <PriceAdjustments setIsCartUpdating={setIsCartUpdating} />
+        <PriceAdjustments setIsCartUpdating={setIsCartUpdating} isSignedIn={isSignedIn} updateTotal={updateTotal} />
     ) : null;
     const priceSummary = hasItems ? (
-        <PriceSummary isUpdating={isCartUpdating} />
+        <PriceSummary isUpdating={isCartUpdating} cartData={cartData}/>
     ) : null;
 
     return (

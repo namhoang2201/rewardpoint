@@ -1,9 +1,9 @@
-import { useState, useCallback, useEffect } from "react";
+import { useState, useCallback } from "react";
 import { useApolloClient, useQuery, useMutation } from "@apollo/react-hooks";
 import { useCartContext } from "@magento/peregrine/lib/context/cart";
 import { useAwaitQuery } from "@magento/peregrine/lib/hooks/useAwaitQuery";
 import { useToasts } from "@magento/peregrine";
-import { useRestCart } from "./useRestCart";
+import { useRestCart } from "@simicart/simi-module/overwrites/talons/CartPage/useRestCart";
 import { getDataFromStoreage } from "@simicart/simi-module/util/storeData";
 
 export const useRewardPoint = (props) => {
@@ -11,6 +11,8 @@ export const useRewardPoint = (props) => {
     mutations: { createCartMutation, spendPointMutation },
     queries: { getCartDetailsQuery, getCustomerRewardInfo },
     icons: { successIcon, errorIcon },
+    isMiniCart: {isMiniCart},
+    updateTotal: {updateTotal}
   } = props;
 
   const apolloClient = useApolloClient();
@@ -44,10 +46,11 @@ export const useRewardPoint = (props) => {
   const refreshCart = useCallback(async () => {
     // TODO: Cart details should be fetched by MiniCart.
     await getCartDetails({
+      apolloClient,
       fetchCartId,
       fetchCartDetails,
     });
-  }, [fetchCartDetails, fetchCartId, getCartDetails]);
+  }, [apolloClient, fetchCartDetails, fetchCartId, getCartDetails]);
 
   // custom spend point action
 
@@ -84,8 +87,12 @@ export const useRewardPoint = (props) => {
     spendPointMutation,
     {
       onCompleted: (data) => {
-        refreshCart();
         updatePointInfo();
+        if(isMiniCart){
+          refreshCart();
+        }else{
+          updateTotal()
+        }
         if (data && data.applyRewardPoint && data.applyRewardPoint.cart) {
           const { error_message, success } = data.applyRewardPoint.cart;
           if (success) {

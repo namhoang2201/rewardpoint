@@ -35,6 +35,8 @@ const FormRewardPoint = (props) => {
       getCustomerRewardInfo: GET_CUSTOMER_AND_REWARD_INFO,
     },
     icons: { successIcon: successIcon, errorIcon: errorIcon },
+    isMiniCart: {isMiniCart: isMiniCart},
+    updateTotal: {updateTotal: props.updateTotal}
   });
 
   const {
