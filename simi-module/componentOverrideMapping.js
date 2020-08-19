@@ -8,5 +8,7 @@ module.exports = componentOverrideMapping = {
     [`@magento/venia-ui/lib/components/MiniCart/footer.js`]: './overwrites/components/MiniCart/footer.js',
     [`@magento/venia-ui/lib/components/CartPage/cartPage.js`]: './overwrites/components/CartPage/cartPage.js',
     [`@magento/venia-ui/lib/components/CheckoutPage/checkoutPage.js`]: './overwrites/components/CheckoutPage/checkoutPage.js',
-    [`@magento/venia-ui/lib/components/Main/main.js`]: './overwrites/components/Main/main.js'
+    [`@magento/venia-ui/lib/components/Main/main.js`]: './overwrites/components/Main/main.js',
+    [`@magento/venia-ui/lib/components/AuthModal/authModal.js`]: './overwrites/components/AuthModal/authModal.js',
+    [`@magento/venia-ui/lib/components/Routes/routes.js`]: './overwrites/components/Routes/routes.js'
 };
