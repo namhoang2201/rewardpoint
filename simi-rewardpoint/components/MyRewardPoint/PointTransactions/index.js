@@ -5,7 +5,7 @@ import PaginationTable from './PaginationTable';
 import { Link } from 'react-router-dom';
 import { usePointTransaction } from '../../../talons/usePointTransaction';
 
-const Transactions = props => {
+const PointTransactions = props => {
     const [limit, setLimit] = useState(10);
 
     const scrollTop = () => {
@@ -59,7 +59,7 @@ const Transactions = props => {
             : 'N/A';
 
         const location = {
-            pathname: '/transactionDetail/' + item.transaction_id
+            pathname: '/pointTransactionDetail/' + item.transaction_id
         };
         return (
             <tr key={index}>
@@ -129,4 +129,4 @@ const Transactions = props => {
     return <>You have no transactions !</>;
 };
 
-export default Transactions;
+export default PointTransactions;

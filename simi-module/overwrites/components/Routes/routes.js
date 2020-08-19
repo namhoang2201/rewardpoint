@@ -3,7 +3,6 @@ import { Route, Switch, useLocation } from 'react-router-dom';
 import { fullPageLoadingIndicator } from '@magento/venia-ui/lib/components/LoadingIndicator/index';
 import HomePage from '@magento/venia-ui/lib/components/HomePage';
 import CartPage from '../CartPage';
-// import CheckoutPage from '../CheckoutPage';
 import MagentoRoute from '../MagentoRoute';
 // rewardpoint customize
 import InjectedComponents from '@simicart/simi-module/inject/injectedComponent';
@@ -12,7 +11,6 @@ import {
     checkPlugin
 } from '@simicart/simi-module/util/checkedPlugin';
 // rewardpoint customize
-// import TransactionDetail from '../MyAccount/RewardPoint/Transactions/TransactionDetail';
 import { useScrollTopOnChange } from '@magento/peregrine/lib/hooks/useScrollTopOnChange';
 
 const Routes = () => {
@@ -26,9 +24,6 @@ const Routes = () => {
                     <Route exact path='/cart'>
                         <CartPage />
                     </Route>
-                    {/* <Route exact path='/checkout'>
-                        <CheckoutPage />
-                    </Route> */}
                     <Route exact path="/rewardpoint">
                         {existModuleRewardPoint ? (
                             <InjectedComponents
@@ -51,12 +46,17 @@ const Routes = () => {
                             <HomePage />
                         )}
                     </Route>
-                    {/* <Route exact path="/transactions">
-                        <AllPointTransactions />
-                    </Route>
                     <Route exact path="/pointTransactionDetail/:transactionId">
-                        <PointTransactionDetail />
-                    </Route> */}
+                        {existModuleRewardPoint ? (
+                            <InjectedComponents
+                                module={REWARDPOINT_MODULE}
+                                func={'PointTransactionDetail'}
+                                parentProps={{}}
+                            />
+                        ) : (
+                            <HomePage />
+                        )}
+                    </Route>
                     <Route exact path="/">
                         <HomePage />
                     </Route>

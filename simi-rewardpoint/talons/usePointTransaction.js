@@ -22,25 +22,31 @@ export const usePointTransaction = props => {
         Array.isArray(data.bssRewardPointsTransaction.items) &&
         data.bssRewardPointsTransaction.items.length
     ) {
-        // filter all transaction by email
-        listItems = data.bssRewardPointsTransaction.items.map(item => {
-            if (item.created_by === email) {
+        if(email){
+            // transaction list
+            // filter all transaction by email
+            listItems = data.bssRewardPointsTransaction.items.map(item => {
+                if (email && item.created_by === email) {
+                    return item;
+                }
+                return null;
+            });
+            // calculate current balance point manually
+            let lastBalance = 0;
+            listItems = listItems.map(item => {
+                lastBalance +=
+                    parseInt(item.point) - parseInt(item.point_expired);
+                item.currentBalance = lastBalance;
                 return item;
-            }
-            return null;
-        });
-        // calculate current balance point manually
-        let lastBalance = 0;
-        listItems = listItems.map(item => {
-            lastBalance +=
-                parseInt(item.point) - parseInt(item.point_expired);
-            item.currentBalance = lastBalance;
-            return item;
-        });
-        // sorting
-        listItems = listItems.sort((a, b) => {
-            return b.transaction_id - a.transaction_id;
-        });
+            });
+            // sorting
+            listItems = listItems.sort((a, b) => {
+                return b.transaction_id - a.transaction_id;
+            });
+        }else{
+            // transaction detail
+            listItems = data.bssRewardPointsTransaction.items
+        }
     }
 
     return {
