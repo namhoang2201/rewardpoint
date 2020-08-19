@@ -12,7 +12,7 @@ import Button from '@magento/venia-ui/lib/components/Button';
 import Icon from '@magento/venia-ui/lib/components/Icon';
 import { fullPageLoadingIndicator } from '@magento/venia-ui/lib/components/LoadingIndicator';
 import AddressBook from '@magento/venia-ui/lib/components/CheckoutPage/AddressBook';
-import OrderSummary from '@magento/venia-ui/lib/components/CheckoutPage/OrderSummary';
+import OrderSummary from './OrderSummary';
 import PaymentInformation from './PaymentInformation';
 import PriceAdjustments from './PriceAdjustments';
 import ShippingMethod from '@magento/venia-ui/lib/components/CheckoutPage/ShippingMethod';
@@ -26,9 +26,9 @@ import { mergeClasses } from '@magento/venia-ui/lib/classify';
 
 import defaultClasses from '@magento/venia-ui/lib/components/CheckoutPage/checkoutPage.css';
 
-import injectedAction from '../../../inject/injectedAction' 
-import InjectedComponent from '../../../inject/injectedComponent'
-import {GIFTCARD_MODULE} from '../../../util/checkedPlugin'
+// customize
+import { useRestCart } from '../../talons/CartPage/useRestCart';
+// end customize
 
 const errorIcon = <Icon src={AlertCircleIcon} size={20} />;
 
@@ -69,22 +69,19 @@ const CheckoutPage = props => {
         toggleActiveContent
     } = talonProps;
 
-    const giftCardCheckoutProps = injectedAction({
-        module: GIFTCARD_MODULE,
-        func: 'useGiftCardCheckOut',
-        otherProps: {
-            setCheckoutStep,
-            checkOutStep: CHECKOUT_STEP
-        }
-    })
-
-    const {
-        checkGiftCartVitrualType
-    } = giftCardCheckoutProps
-
-    const isGiftCardVitrual = checkGiftCartVitrualType()
-
     const [, { addToast }] = useToasts();
+
+    // reward customize
+    const restTalons = useRestCart();
+    const {
+        cartData,
+        getCartDetailCustom
+    } = restTalons;
+    
+    const updateTotal = () => {
+        getCartDetailCustom()
+    }
+    // end customize
 
     useEffect(() => {
         if (hasError) {
@@ -106,12 +103,6 @@ const CheckoutPage = props => {
             }
         }
     }, [addToast, error, hasError]);
-
-    useEffect(() => {
-        if(isGiftCardVitrual && isGiftCardVitrual === 1 && checkoutStep <= 1) {
-            setCheckoutStep(CHECKOUT_STEP.PAYMENT)
-        }
-    }, [isGiftCardVitrual])
 
     const classes = mergeClasses(defaultClasses, propClasses);
 
@@ -152,23 +143,20 @@ const CheckoutPage = props => {
                 </Button>
             </div>
         ) : null;
-        
-        let shippingMethodSection = null;
-        if(!isGiftCardVitrual || isGiftCardVitrual !== 1) {
-            shippingMethodSection =
-                checkoutStep >= CHECKOUT_STEP.SHIPPING_METHOD ? (
-                    <ShippingMethod
-                        pageIsUpdating={isUpdating}
-                        onSave={setShippingMethodDone}
-                        setPageIsUpdating={setIsUpdating}
-                    />
-                ) : (
-                    <h3 className={classes.shipping_method_heading}>
-                        {'2. Shipping Method'}
-                    </h3>
-                );
-        }
-        
+
+        const shippingMethodSection =
+            checkoutStep >= CHECKOUT_STEP.SHIPPING_METHOD ? (
+                <ShippingMethod
+                    pageIsUpdating={isUpdating}
+                    onSave={setShippingMethodDone}
+                    setPageIsUpdating={setIsUpdating}
+                />
+            ) : (
+                <h3 className={classes.shipping_method_heading}>
+                    {'2. Shipping Method'}
+                </h3>
+            );
+
         const paymentInformationSection =
             checkoutStep >= CHECKOUT_STEP.PAYMENT ? (
                 <PaymentInformation
@@ -187,7 +175,7 @@ const CheckoutPage = props => {
         const priceAdjustmentsSection =
             checkoutStep === CHECKOUT_STEP.PAYMENT ? (
                 <div className={classes.price_adjustments_container}>
-                    <PriceAdjustments setPageIsUpdating={setIsUpdating} />
+                    <PriceAdjustments setPageIsUpdating={setIsUpdating} isSignedIn={!isGuestCheckout} updateTotal={updateTotal} />
                 </div>
             ) : null;
 
@@ -224,23 +212,6 @@ const CheckoutPage = props => {
                 </Button>
             ) : null;
 
-        const shippingInformation = 
-            isGiftCardVitrual !== 1 ? (
-                <div className={classes.shipping_information_container}>
-                    <ShippingInformation
-                        onSave={setShippingInformationDone}
-                        toggleActiveContent={toggleActiveContent}
-                    />
-                </div>
-            ) : (
-                <div className={classes.shipping_information_container}>
-                    <InjectedComponent 
-                        module={GIFTCARD_MODULE} 
-                        func="ShippingInfoGiftCardVitrual"
-                    />
-                </div>
-            )
-
         // If we're on mobile we should only render price summary in/after review.
         const shouldRenderPriceSummary = !(
             isMobile && checkoutStep < CHECKOUT_STEP.REVIEW
@@ -248,7 +219,7 @@ const CheckoutPage = props => {
 
         const orderSummary = shouldRenderPriceSummary ? (
             <div className={classes.summaryContainer}>
-                <OrderSummary isUpdating={isUpdating} />
+                <OrderSummary isUpdating={isUpdating} cartData={cartData} />
             </div>
         ) : null;
 
@@ -271,7 +242,12 @@ const CheckoutPage = props => {
                         {guestCheckoutHeaderText}
                     </h1>
                 </div>
-                {shippingInformation}
+                <div className={classes.shipping_information_container}>
+                    <ShippingInformation
+                        onSave={setShippingInformationDone}
+                        toggleActiveContent={toggleActiveContent}
+                    />
+                </div>
                 <div className={classes.shipping_method_container}>
                     {shippingMethodSection}
                 </div>

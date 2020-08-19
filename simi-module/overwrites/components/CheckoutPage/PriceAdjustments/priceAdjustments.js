@@ -11,7 +11,7 @@ import defaultClasses from '@magento/venia-ui/lib/components/CheckoutPage/PriceA
 
 // customize
 import InjectedComponents from '../../../../inject/injectedComponent'
-import {GIFTCARD_MODULE} from '../../../../util/checkedPlugin'
+import {GIFTCARD_MODULE, REWARDPOINT_MODULE, checkPlugin} from '../../../../util/checkedPlugin'
 // end customize
 
 /**
@@ -22,7 +22,9 @@ import {GIFTCARD_MODULE} from '../../../../util/checkedPlugin'
 const PriceAdjustments = props => {
     const classes = mergeClasses(defaultClasses, props.classes);
 
-    const { setPageIsUpdating } = props;
+    const { setPageIsUpdating, updateTotal } = props;
+
+    const existModuleRewardPoint = checkPlugin(REWARDPOINT_MODULE);
 
     return (
         <div className={classes.root}>
@@ -38,6 +40,20 @@ const PriceAdjustments = props => {
                     module={GIFTCARD_MODULE}
                     func={'GiftCardOptionsCoupon'}
                 />
+                {existModuleRewardPoint && props.isSignedIn && (
+                    <Section id={'rewardpoint'} title={'Apply Reward'}>
+                        <InjectedComponents
+                            module={REWARDPOINT_MODULE}
+                            func={'FormRewardPoint'}
+                            parentProps={{
+                                onCancel: null,
+                                isMiniCart: false,
+                                classes: classes,
+                                updateTotal: updateTotal
+                            }}
+                        />
+                    </Section>
+                )}
             </Accordion>
         </div>
     );

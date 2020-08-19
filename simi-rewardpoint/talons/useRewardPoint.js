@@ -36,7 +36,7 @@ export const useRewardPoint = (props) => {
   const point_used = rewardpointInfo
     ? Math.abs(parseInt(rewardpointInfo.point_used))
     : 0;
-  console.log(data);
+
   // useEffect(() => {
   //     // Passing apolloClient to wipe the store in event of auth token expiry
   //     // This will only happen if the user refreshes.

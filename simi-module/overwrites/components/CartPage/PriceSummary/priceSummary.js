@@ -95,7 +95,6 @@ const PriceSummary = (props) => {
             }
         });
     }
-    console.log(cartData)
   // end customize
 
   return (

@@ -45,20 +45,18 @@ const PriceAdjustments = props => {
                     module={GIFTCARD_MODULE}
                     func={'GiftCardOptionsCoupon'}
                 />
-                {existModuleRewardPoint && (
+                {existModuleRewardPoint && props.isSignedIn && (
                     <Section id={'rewardpoint'} title={'Apply Reward'}>
-                        {props.isSignedIn && (
-                            <InjectComponents
-                                module={REWARDPOINT_MODULE}
-                                func={'FormRewardPoint'}
-                                parentProps={{
-                                    onCancel: null,
-                                    isMiniCart: false,
-                                    classes: classes,
-                                    updateTotal: updateTotal
-                                }}
-                            />
-                        )}
+                        <InjectComponents
+                            module={REWARDPOINT_MODULE}
+                            func={'FormRewardPoint'}
+                            parentProps={{
+                                onCancel: null,
+                                isMiniCart: false,
+                                classes: classes,
+                                updateTotal: updateTotal
+                            }}
+                        />
                     </Section>
                 )}
             </Accordion>
