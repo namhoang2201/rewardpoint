@@ -79,7 +79,7 @@ const PriceSummary = (props) => {
 
   // customize
   const {cartData} = props;
-  let customGrandTotal = 0;
+  let customGrandTotal = null;
   if (cartData && cartData.hasOwnProperty('total_segments') && Array.isArray(cartData.total_segments) && cartData.total_segments.length) {
       cartData.total_segments.forEach(item => {
           if (item.code === 'grand_total' && item.value) {
@@ -87,7 +87,7 @@ const PriceSummary = (props) => {
           }
       });
   }
-  let discount = 0;
+  let discount = null;
     if (cartData && cartData.hasOwnProperty('total_segments') && Array.isArray(cartData.total_segments) && cartData.total_segments.length) {
         cartData.total_segments.forEach(item => {
             if (item.code === 'spend_point' && item.value) {
@@ -95,6 +95,7 @@ const PriceSummary = (props) => {
             }
         });
     }
+    console.log(cartData)
   // end customize
 
   return (
@@ -135,7 +136,7 @@ const PriceSummary = (props) => {
           isCheckout={isCheckout}
         />
         {
-          discount&&<React.Fragment>
+          cartData&&discount&&<React.Fragment>
             <span className={classes.lineItemLabel}>{'RewardPoint Discount'}</span>
             <span className={classes.price}>
                 <Price
@@ -150,7 +151,7 @@ const PriceSummary = (props) => {
         </span>
         <span className={totalPriceClass}>
           <Price
-            value={cartData ? customGrandTotal : total.value}
+            value={cartData&&customGrandTotal ? customGrandTotal : total.value}
             currencyCode={total.currency}
           />
         </span>
