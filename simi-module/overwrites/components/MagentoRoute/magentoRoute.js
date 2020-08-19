@@ -17,9 +17,9 @@ const MagentoRoute = () => {
     const { component: RootComponent, id, isLoading, routeError } = talonProps;
     const path = window.location.pathname;
     const listCustomRoute = [
-        '/cart', '/checkout', '/rewardpoint', '/transactions',
+        '/cart', '/checkout', '/rewardpoint', '/pointTransactions',
     ]
-    if (listCustomRoute.includes(path) || path.includes('/transactionDetail')) {
+    if (listCustomRoute.includes(path) || path.includes('/pointTransactionDetail')) {
         return null;
     }
     if (isLoading) {

@@ -2,7 +2,7 @@ import React, { Suspense } from 'react';
 import { Route, Switch, useLocation } from 'react-router-dom';
 import { fullPageLoadingIndicator } from '@magento/venia-ui/lib/components/LoadingIndicator/index';
 import HomePage from '@magento/venia-ui/lib/components/HomePage';
-// import CartPage from '../CartPage';
+import CartPage from '../CartPage';
 // import CheckoutPage from '../CheckoutPage';
 import MagentoRoute from '../MagentoRoute';
 // rewardpoint customize
@@ -13,7 +13,6 @@ import {
 } from '@simicart/simi-module/util/checkedPlugin';
 // rewardpoint customize
 // import TransactionDetail from '../MyAccount/RewardPoint/Transactions/TransactionDetail';
-// import AllTransactions from '../MyAccount/RewardPoint/allTransactions';
 import { useScrollTopOnChange } from '@magento/peregrine/lib/hooks/useScrollTopOnChange';
 
 const Routes = () => {
@@ -24,10 +23,10 @@ const Routes = () => {
         <Suspense fallback={fullPageLoadingIndicator}>
             <Switch>
                 <Route>
-                    {/* <Route exact path="/cart">
+                    <Route exact path='/cart'>
                         <CartPage />
                     </Route>
-                    <Route exact path="/checkout">
+                    {/* <Route exact path='/checkout'>
                         <CheckoutPage />
                     </Route> */}
                     <Route exact path="/rewardpoint">
@@ -41,11 +40,22 @@ const Routes = () => {
                             <HomePage />
                         )}
                     </Route>
-                    {/* <Route exact path="/transactions">
-                        <AllTransactions />
+                    <Route exact path="/pointTransactions">
+                        {existModuleRewardPoint ? (
+                            <InjectedComponents
+                                module={REWARDPOINT_MODULE}
+                                func={'AllPointTransactions'}
+                                parentProps={{}}
+                            />
+                        ) : (
+                            <HomePage />
+                        )}
                     </Route>
-                    <Route exact path="/transactionDetail/:transactionId">
-                        <TransactionDetail />
+                    {/* <Route exact path="/transactions">
+                        <AllPointTransactions />
+                    </Route>
+                    <Route exact path="/pointTransactionDetail/:transactionId">
+                        <PointTransactionDetail />
                     </Route> */}
                     <Route exact path="/">
                         <HomePage />

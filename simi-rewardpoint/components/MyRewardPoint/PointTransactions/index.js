@@ -3,6 +3,7 @@ import { getBssRewardPointsTransactions } from './bssRewardPointsTransactions.gq
 import LoadingIndicator from '@magento/venia-ui/lib/components/LoadingIndicator';
 import PaginationTable from './PaginationTable';
 import { Link } from 'react-router-dom';
+import { usePointTransaction } from '../../../talons/usePointTransaction';
 
 const Transactions = props => {
     const [limit, setLimit] = useState(10);

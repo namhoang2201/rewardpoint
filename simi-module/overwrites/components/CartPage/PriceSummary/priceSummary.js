@@ -1,7 +1,7 @@
 import React from "react";
 import gql from "graphql-tag";
 import { Price } from "@magento/peregrine";
-import { usePriceSummary } from '@magento/peregrine/lib/talons/CartPage/PriceSummary/usePriceSummary';
+import { usePriceSummary } from '../../../talons/CartPage/PriceSummary/usePriceSummary';
 import Button from "@magento/venia-ui/lib/components/Button";
 import { mergeClasses } from "@magento/venia-ui/lib/classify";
 import defaultClasses from "./priceSummary.css";

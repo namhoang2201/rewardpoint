@@ -89,7 +89,7 @@ const MyRewardPoint = props => {
                             <span
                                 className="view-all"
                                 role="presentation"
-                                onClick={() => history.push('/transactions')}
+                                onClick={() => history.push('/pointTransactions')}
                             >
                                 View all
                             </span>
