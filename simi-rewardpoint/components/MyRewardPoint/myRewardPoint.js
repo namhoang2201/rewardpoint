@@ -7,7 +7,17 @@ import { useMiniCart } from '@magento/peregrine/lib/talons/MiniCart/useMiniCart'
 import { useHistory } from 'react-router-dom';
 import { Price } from '@magento/peregrine';
 import PointTransactions from './PointTransactions';
-import { useCustomerPoint } from '../../talons/useCustomerPoint';
+import { useNotifyRP } from '../../talons/useNotifyRP';
+import { updateNotifyMutation } from './updateNotifyMutation.gql.js';
+import RadioCheckbox from '../BaseComponents/RadioCheckbox/index';
+import {
+    AlertCircle as AlertCircleIcon,
+    Smile as SuccessIcon
+} from 'react-feather';
+import Icon from '@magento/venia-ui/lib/components/Icon';
+import $ from 'jquery';
+const errorIcon = <Icon src={AlertCircleIcon} attrs={{ width: 18 }} />;
+const successIcon = <Icon src={SuccessIcon} attrs={{ width: 18 }} />;
 require('./myRewardPoint.scss');
 
 const MyRewardPoint = props => {
@@ -20,8 +30,10 @@ const MyRewardPoint = props => {
         if (!isSignedIn) history.push('/');
     }, [isSignedIn, history]);
 
-    const talonProps = useCustomerPoint({
-        queries: { getCustomerQuery: getCustomerQuery }
+    const talonProps = useNotifyRP({
+        mutations: { updateNotifyMutation: updateNotifyMutation },
+        queries: { getNotifyStatusQuery: getCustomerQuery },
+        icons: { successIcon: successIcon, errorIcon: errorIcon }
     });
 
     const {
@@ -31,7 +43,10 @@ const MyRewardPoint = props => {
         balance,
         point_earned,
         point_spent,
-        exchange_rate
+        exchange_rate,
+        notify_balance,
+        notify_expiration,
+        handleUpdateNotify
     } = talonProps;
 
     if (loading) {
@@ -89,7 +104,9 @@ const MyRewardPoint = props => {
                             <span
                                 className="view-all"
                                 role="presentation"
-                                onClick={() => history.push('/pointTransactions')}
+                                onClick={() =>
+                                    history.push('/pointTransactions')
+                                }
                             >
                                 View all
                             </span>
@@ -102,6 +119,61 @@ const MyRewardPoint = props => {
                                 />
                             </div>
                         </div>
+                    </div>
+                    <div className="wrap">
+                        <div className="subtitle">Notification</div>
+                        <div className="subcontent">
+                            <p className="rw-point">
+                                <span>
+                                    <RadioCheckbox
+                                        defaultChecked={
+                                            notify_balance === 1 ? true : false
+                                        }
+                                        id="checkbox-notify-balance"
+                                        name="notify_balance_input"
+                                    />
+                                </span>{' '}
+                                <span className="color">
+                                    Notify when balance is updated
+                                </span>
+                            </p>
+                            <p className="rw-point">
+                                <span>
+                                    <RadioCheckbox
+                                        defaultChecked={
+                                            notify_expiration === 1
+                                                ? true
+                                                : false
+                                        }
+                                        id="checkbox-notify-expiration"
+                                        name="notify_expiration_input"
+                                    />
+                                </span>{' '}
+                                <span className="color">
+                                    Notify before expiration
+                                </span>
+                            </p>
+                        </div>
+                        <button
+                            onClick={() => {
+                                const n_balance_int =
+                                    $('#checkbox-notify-balance').is(
+                                        ':checked'
+                                    ) === true
+                                        ? 1
+                                        : 0;
+                                const n_expire_int =
+                                    $('#checkbox-notify-expiration').is(
+                                        ':checked'
+                                    ) === true
+                                        ? 1
+                                        : 0;
+                                console.log(n_balance_int);
+                                handleUpdateNotify(n_balance_int, n_expire_int);
+                            }}
+                        >
+                            Save
+                        </button>
                     </div>
                 </div>
             </div>

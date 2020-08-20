@@ -15,17 +15,23 @@ export const useCustomerPoint = props => {
     let point_spent = 0;
     let point_earned = 0;
     let exchange_rate = 0;
+    let notify_balance = 0;
+    let notify_expiration = 0;
     if (data) {
-      point = parseInt(data.customer.reward_point.point);
-      poin_expired = parseInt(data.customer.reward_point.point_expired);
-      balance = point - poin_expired > 0 ? point - poin_expired : 0;
-      point_spent = data.customer.reward_point.point_used
-        ? parseInt(data.customer.reward_point.point_used)
-        : 0;
-      point_earned = point - point_spent > 0 ? point - point_spent : 0;
-      exchange_rate = data.customer.reward_point.rate_point
-        ? parseInt(data.customer.reward_point.rate_point)
-        : 0;
+        point = parseInt(data.customer.reward_point.point);
+        poin_expired = parseInt(data.customer.reward_point.point_expired);
+        balance = point - poin_expired > 0 ? point - poin_expired : 0;
+        point_spent = data.customer.reward_point.point_used
+            ? parseInt(data.customer.reward_point.point_used)
+            : 0;
+        point_earned = point - point_spent > 0 ? point - point_spent : 0;
+        exchange_rate = data.customer.reward_point.rate_point
+            ? parseInt(data.customer.reward_point.rate_point)
+            : 0;
+        notify_balance =
+            data.customer.reward_point.notify_balance === 1 ? 1 : 0;
+        notify_expiration =
+            data.customer.reward_point.notify_expiration === 1 ? 1 : 0;
     }
 
     return {
@@ -35,6 +41,8 @@ export const useCustomerPoint = props => {
         balance,
         point_earned,
         point_spent,
-        exchange_rate
+        exchange_rate,
+        notify_balance,
+        notify_expiration
     };
 };
