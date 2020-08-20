@@ -29,19 +29,19 @@ const Total = props => {
                     <div key={index} className={props.classes.itemtotal}>
                         <span className={props.classes.label}>{item.title}: </span>
                         <span className={props.classes.value}>
-                            <Price currencyCode={currencyCode} value={item.value} />
+                            {item.code === 'earn_point' ?<span style={{ color: '#000000', fontWeight: 'normal' }}>{item.value}</span> : <Price currencyCode={currencyCode} value={item.value} />}
                             {item.code === 'spend_point' && spend_points > 0 ? <span style={{ color: '#000000', fontWeight: 'normal' }}> ({spend_points} point(s))</span> : ''}
                         </span>
                     </div>
                 )
             } else {
-                // not minicart (cartpage, checkout) -> only add spend_point
-                if (item.code === 'spend_point') {
+                // not minicart (cartpage, checkout) -> only add spend_point, earn_point
+                if (item.code === 'spend_point' || item.code === 'earn_point') {
                     totalRows.push(
                         <div key={index} className={props.classes.itemtotal}>
                             <span className={props.classes.label}>{item.title}: </span>
                             <span className={props.classes.value}>
-                                <Price currencyCode={currencyCode} value={item.value} />
+                                {item.code === 'earn_point' ? <span style={{ color: '#000000', fontWeight: 'normal' }}>{item.value} point(s)</span> : <Price currencyCode={currencyCode} value={item.value} />}
                                 {item.code === 'spend_point' && spend_points > 0 ? <span style={{ color: '#000000', fontWeight: 'normal' }}> ({spend_points} point(s))</span> : ''}
                             </span>
                         </div>

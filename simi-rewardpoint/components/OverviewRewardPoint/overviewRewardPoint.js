@@ -12,7 +12,7 @@ const OverviewRewardPoint = (props) => {
     spend_amount,
     quote_currency_code,
   } = talonProps;
-
+  
   const customStyle1 = { fontWeight: 'bold', display: 'flex', justifyContent: 'space-between' }
   const customStyle2 = { color: '#1498d0', fontSize: '14px' }
 

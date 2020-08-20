@@ -46,7 +46,7 @@ const FormRewardPoint = (props) => {
     cartId,
     point_slider,
     handleSpendPoint,
-    point_used,
+    spend_point,
     pointSpend,
     setPointSpend,
     isSignedIn,
@@ -55,12 +55,12 @@ const FormRewardPoint = (props) => {
     quote_currency_code,
     updatePointInfo,
   } = talonProps;
-  // console.log(talonProps)
 
   // useEffect(()=>{
-  //   $("#point-input").val(point_used);
-  // })
-
+  //   if(spend_point > 0){
+  //     setPointSpend(spend_point)
+  //   }
+  // },[0])
   return (
     <div className={classes.root}>
       {!rewardpointInfo || isLoading || !cartData || !quote_currency_code ? (
@@ -104,7 +104,7 @@ const FormRewardPoint = (props) => {
                 type="number"
                 id="point-input"
                 name="pointspend"
-                min="0"
+                pattern = "[0-1000000000]"
                 onKeyUp={(e) => {
                   if (parseInt(e.target.value) <= currentBalancePoint) {
                     setPointSpend(parseInt(e.target.value));

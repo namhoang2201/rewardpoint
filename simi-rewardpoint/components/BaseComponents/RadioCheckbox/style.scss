@@ -1,7 +1,6 @@
 .checkbox-customize {
     display: block;
     position: relative;
-    padding-left: 32px;
     cursor: pointer;
     font-size: 22px;
     -webkit-user-select: none;
@@ -9,55 +8,9 @@
     -ms-user-select: none;
     user-select: none;
     input {
-        position: absolute;
-        opacity: 0;
         cursor: pointer;
-        &:checked ~ .checkmark-custom {
-            background-color: #5faf4b;
-            &::before {
-                display: block;
-            }
-        }
-    }
-    .checkmark-custom {
-        position: absolute;
-        top: 0;
-        left: 0;
-        height: 25px;
-        width: 25px;
-        border-radius: 50%;
-        border: 1px solid #000000;
-        border-radius: 1px;
-        background-color: #ffffff;
-        color: #fff;
-        font-family: Linearicons;
-        font-size: 16px;
-        &::before {
-            content: '\e934';
-            position: absolute;
-            display: none;
-            top: 0px;
-            left: 5px;
-            width: 16px;
-            height: 12px;
-            border-radius: 50%;
-        }
-    }
-    > span:not(.checkmark-custom) {
-        font-size: 14px;
-        line-height: 17px;
-        font-weight: 300;
-        vertical-align: middle;
-    }
-}
-
-.rtl-root {
-    .checkbox-customize {
-        padding-left: unset;
-        padding-right: 32px;
-        .checkmark-custom {
-            left: unset;
-            right: 0;
-        }
+        height: 17px;
+        width: 17px;
+        margin-right: 20px;
     }
 }

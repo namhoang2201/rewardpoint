@@ -123,7 +123,7 @@ const MyRewardPoint = props => {
                     <div className="wrap">
                         <div className="subtitle">Notification</div>
                         <div className="subcontent">
-                            <p className="rw-point">
+                            <p className="rw-point rw-check">
                                 <span>
                                     <RadioCheckbox
                                         defaultChecked={
@@ -137,7 +137,7 @@ const MyRewardPoint = props => {
                                     Notify when balance is updated
                                 </span>
                             </p>
-                            <p className="rw-point">
+                            <p className="rw-point rw-check">
                                 <span>
                                     <RadioCheckbox
                                         defaultChecked={
@@ -155,6 +155,7 @@ const MyRewardPoint = props => {
                             </p>
                         </div>
                         <button
+                            className="save"
                             onClick={() => {
                                 const n_balance_int =
                                     $('#checkbox-notify-balance').is(

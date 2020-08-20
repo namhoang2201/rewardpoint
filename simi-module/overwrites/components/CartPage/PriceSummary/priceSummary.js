@@ -95,6 +95,14 @@ const PriceSummary = (props) => {
             }
         });
     }
+  let earnPoint = null;
+    if (cartData && cartData.hasOwnProperty('total_segments') && Array.isArray(cartData.total_segments) && cartData.total_segments.length) {
+        cartData.total_segments.forEach(item => {
+            if (item.code === 'earn_point' && item.value) {
+                earnPoint = item.value
+            }
+        });
+    }
   // end customize
 
   return (
@@ -142,6 +150,14 @@ const PriceSummary = (props) => {
                     value={discount}
                     currencyCode={total.currency}
                 />
+            </span>
+          </React.Fragment>
+        }
+        {
+          cartData&&earnPoint&&<React.Fragment>
+            <span className={classes.lineItemLabel}>{'Earn Point'}</span>
+            <span className={classes.price}>
+                {earnPoint}
             </span>
           </React.Fragment>
         }

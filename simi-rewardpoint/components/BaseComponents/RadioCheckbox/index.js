@@ -15,7 +15,6 @@ const RadioCheckbox = props => {
                 defaultValue={defaultValue}
                 {...props}
             />
-            <span className="checkmark-custom" />
         </label>
     );
 };

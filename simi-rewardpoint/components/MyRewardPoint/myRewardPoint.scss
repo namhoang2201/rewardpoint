@@ -70,7 +70,14 @@
                     font-weight: 600;
                 }
             }
-            .save{
+            .rw-check{
+                display: flex;
+                align-items: center;
+                .color{
+                    color: #000000 !important;
+                }
+            }
+            .save {
                 background: #006bb4;
                 border: 1px solid #006bb4;
                 color: #ffffff;

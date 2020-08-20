@@ -33,9 +33,6 @@ export const useRewardPoint = (props) => {
   const currentBalancePoint = rewardpointInfo
     ? parseInt(rewardpointInfo.point) - parseInt(rewardpointInfo.point_expired)
     : 0;
-  const point_used = rewardpointInfo
-    ? Math.abs(parseInt(rewardpointInfo.point_used))
-    : 0;
 
   // useEffect(() => {
   //     // Passing apolloClient to wipe the store in event of auth token expiry
@@ -54,16 +51,6 @@ export const useRewardPoint = (props) => {
 
   // custom spend point action
 
-  const [pointSpend, setPointSpend] = useState(point_used);
-  const storeConfig = getDataFromStoreage("SESSION_STOREAGE", "STORE_CONFIG");
-  let point_slider = 0;
-  if (
-    storeConfig &&
-    storeConfig.hasOwnProperty("bssRewardPointStoreConfig") &&
-    storeConfig.bssRewardPointStoreConfig.hasOwnProperty("point_slider")
-  ) {
-    point_slider = storeConfig.bssRewardPointStoreConfig.point_slider;
-  }
   const restTalons = useRestCart();
   const {
     isSignedIn,
@@ -76,6 +63,17 @@ export const useRewardPoint = (props) => {
     spend_amount,
     quote_currency_code,
   } = restTalons;
+
+  const [pointSpend, setPointSpend] = useState(spend_point);
+  const storeConfig = getDataFromStoreage("SESSION_STOREAGE", "STORE_CONFIG");
+  let point_slider = 0;
+  if (
+    storeConfig &&
+    storeConfig.hasOwnProperty("bssRewardPointStoreConfig") &&
+    storeConfig.bssRewardPointStoreConfig.hasOwnProperty("point_slider")
+  ) {
+    point_slider = storeConfig.bssRewardPointStoreConfig.point_slider;
+  }
 
   const updatePointInfo = useCallback(() => {
     getCartDetailCustom();
@@ -126,7 +124,10 @@ export const useRewardPoint = (props) => {
   );
 
   const handleSpendPoint = (numberPointSpend) => {
-    if (!numberPointSpend || numberPointSpend < 1) {
+    if(Number.isNaN(numberPointSpend)){
+      numberPointSpend = 0;
+    }
+    if (numberPointSpend < 0) {
       addToast({
         type: "error",
         icon: errorIcon,
@@ -150,7 +151,7 @@ export const useRewardPoint = (props) => {
     cartId,
     point_slider,
     handleSpendPoint,
-    point_used,
+    spend_point,
     pointSpend,
     setPointSpend,
     isSignedIn,

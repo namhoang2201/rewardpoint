@@ -4,6 +4,7 @@ import CustomMain from './components/CustomMain';
 import MyRewardPoint from './components/MyRewardPoint';
 import AllPointTransactions from './components/MyRewardPoint/PointTransactions/allPointTransaction';
 import PointTransactionDetail from './components/MyRewardPoint/PointTransactions/transactionDetail';
+import PointHeader from './components/PointHeader';
 import {useStoreConfig } from './talons/useStoreConfig';
 import {useRewardPoint } from './talons/useRewardPoint';
 
@@ -14,6 +15,7 @@ export default {
     MyRewardPoint,
     AllPointTransactions,
     PointTransactionDetail,
+    PointHeader,
     useStoreConfig,
     useRewardPoint
 }

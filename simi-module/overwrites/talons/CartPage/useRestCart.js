@@ -37,12 +37,11 @@ export const useRestCart = (props) => {
     if(cartData&&cartData.hasOwnProperty('quote_currency_code')){
       quote_currency_code = cartData.quote_currency_code;
     }
-    if(cartData&&cartData.hasOwnProperty('earn_points')){
+    if(extension_attributes&&extension_attributes.hasOwnProperty('earn_points')){
       earn_point = extension_attributes.earn_points;
     }
     if (
-      extension_attributes &&
-      extension_attributes.hasOwnProperty("spend_points")
+      extension_attributes &&extension_attributes.hasOwnProperty("spend_points")
     ) {
       spend_point = extension_attributes.spend_points;
     }
