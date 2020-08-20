@@ -21,15 +21,23 @@ import {
     ADD_SIMPLE_MUTATION
 } from './productFullDetail.gql';
 // custom gift card
-import {GIFTCARD_MODULE} from '../../../util/checkedPlugin'
+import {
+    GIFTCARD_MODULE,
+    REWARDPOINT_MODULE
+} from '../../../util/checkedPlugin';
 import InjectedComponents from '@simicart/simi-module/inject/injectedComponent';
-import injectedAction from '../../../inject/injectedAction'
+import injectedAction from '../../../inject/injectedAction';
 // end custome gift card
 
-const Options = React.lazy(() => import('@magento/venia-ui/lib/components/ProductOptions'));
+const Options = React.lazy(() =>
+    import('@magento/venia-ui/lib/components/ProductOptions')
+);
 
 const ProductFullDetail = props => {
     const { product } = props;
+    // nam customize
+    const { url_key } = product;
+    // end customize
 
     const talonProps = useProductFullDetail({
         addConfigurableProductToCartMutation: ADD_CONFIGURABLE_MUTATION,
@@ -55,20 +63,21 @@ const ProductFullDetail = props => {
         func: 'useProductGiftCard',
         otherProps: {
             quantity,
-            product, 
+            product,
             productDetails,
             mediaGalleryEntries,
             createCartMutation: CREATE_CART_MUTATION,
-            getCartDetailsQuery: GET_CART_DETAILS_QUERY,
-        },
-    })
+            getCartDetailsQuery: GET_CART_DETAILS_QUERY
+        }
+    });
 
-    let customAddToCardDisable = isAddToCartDisabled
-    if(giftCardProps && giftCardProps.isProductGiftCart) customAddToCardDisable = false
+    let customAddToCardDisable = isAddToCartDisabled;
+    if (giftCardProps && giftCardProps.isProductGiftCart)
+        customAddToCardDisable = false;
 
-    let customHandleAddToCart = handleAddToCart
-    if(giftCardProps && giftCardProps.handleAddProductGiftCartToCart) customHandleAddToCart = giftCardProps.handleAddProductGiftCartToCart
-
+    let customHandleAddToCart = handleAddToCart;
+    if (giftCardProps && giftCardProps.handleAddProductGiftCartToCart)
+        customHandleAddToCart = giftCardProps.handleAddProductGiftCartToCart;
 
     const classes = mergeClasses(defaultClasses, props.classes);
 
@@ -106,16 +115,27 @@ const ProductFullDetail = props => {
                 <section className={classes.imageCarousel}>
                     <Carousel images={mediaGalleryEntries} />
                 </section>
-                {   
-                    <InjectedComponents 
-                        module={GIFTCARD_MODULE} 
-                        func={'ProductGiftCardOptions'} 
+                {
+                    <InjectedComponents
+                        module={GIFTCARD_MODULE}
+                        func={'ProductGiftCardOptions'}
                         parentProps={{
-                            product, 
+                            product,
                             currencyCode: productDetails.price.currency,
                             giftCardProps
-                        }}/>
+                        }}
+                    />
                 }
+                {url_key && (
+                    <InjectedComponents
+                        module={REWARDPOINT_MODULE}
+                        func={'PointMessage'}
+                        parentProps={{
+                            url_key,
+                            type: 'submit_review'
+                        }}
+                    />
+                )}
                 <section className={classes.options}>{options}</section>
                 <section className={classes.quantity}>
                     <h2 className={classes.quantityTitle}>Quantity</h2>
@@ -133,6 +153,16 @@ const ProductFullDetail = props => {
                         Add to Cart
                     </Button>
                 </section>
+                {url_key && (
+                    <InjectedComponents
+                        module={REWARDPOINT_MODULE}
+                        func={'PointMessage'}
+                        parentProps={{
+                            url_key,
+                            type: 'product_config'
+                        }}
+                    />
+                )}
                 <section className={classes.description}>
                     <h2 className={classes.descriptionTitle}>
                         Product Description
