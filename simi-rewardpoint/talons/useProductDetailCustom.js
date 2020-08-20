@@ -20,7 +20,7 @@ export const useProductDetailCustom = props => {
         Array.isArray(data.productDetail.items) &&
         data.productDetail.items.length
     ) {
-        reward_point = data.productDetail.items[0];
+        reward_point = data.productDetail.items[0].reward_point;
     }
     return {
         reward_point

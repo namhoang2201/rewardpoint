@@ -1,8 +1,10 @@
 import React from 'react';
 import { GET_PRODUCT_DETAIL_CUSTOM } from './getProductDetailCustom.gql';
 import { useProductDetailCustom } from '../../talons/useProductDetailCustom';
+import { useUserContext } from '@magento/peregrine/lib/context/user';
 
 const PointMessage = props => {
+    
     const { url_key, type } = props;
 
     const talonProps = useProductDetailCustom({
