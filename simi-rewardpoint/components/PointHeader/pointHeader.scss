@@ -1,0 +1,15 @@
+.header-point {
+    display: flex;
+    .icon {
+        width: 1rem;
+        height: 1rem;
+        background-color: transparent;
+        background-image: url('./bss-icon.png');
+        background-repeat: no-repeat;
+        background-size: contain;
+        margin-right: 1rem;
+    }
+    .title {
+        text-transform: capitalize;
+    }
+}

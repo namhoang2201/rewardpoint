@@ -2,7 +2,7 @@ import React, { useCallback } from 'react';
 import { arrayOf, func, node, shape, string } from 'prop-types';
 import { mergeClasses } from '@magento/venia-ui/lib/classify';
 import Button from '@magento/venia-ui/lib/components/Button';
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
 
 import defaultClasses from '@magento/venia-ui/lib/components/MyAccount/accountLink.css';
 
@@ -22,10 +22,12 @@ const AccountLink = props => {
             <Link to={props.link}>
                 <Button classes={classes} onClick={handleClick}>
                     <span className={classes.icon}>{icon}</span>
-                    <span className={classes.text}>{text}</span>
+                    <span className={classes.text}>
+                        {text} {props.pointComponent}
+                    </span>
                 </Button>
             </Link>
-        )
+        );
     }
 
     return (

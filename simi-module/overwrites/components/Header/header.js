@@ -23,6 +23,7 @@ const SearchBar = React.lazy(() =>
 import { REWARDPOINT_MODULE, checkPlugin } from '../../../util/checkedPlugin';
 import InjectedComponents from '@simicart/simi-module/inject/injectedComponent';
 import { getDataFromStoreage } from '../../../util/storeData';
+require('./header.scss');
 // end customize
 
 const Header = props => {

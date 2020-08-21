@@ -169,7 +169,6 @@ const MyRewardPoint = props => {
                                     ) === true
                                         ? 1
                                         : 0;
-                                console.log(n_balance_int);
                                 handleUpdateNotify(n_balance_int, n_expire_int);
                             }}
                         >

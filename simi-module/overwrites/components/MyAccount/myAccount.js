@@ -13,6 +13,7 @@ import {
     REWARDPOINT_MODULE,
     checkPlugin
 } from '@simicart/simi-module/util/checkedPlugin';
+import InjectedComponents from '@simicart/simi-module/inject/injectedComponent';
 // end customize
 
 const PURCHASE_HISTORY = 'Purchase History';
@@ -52,7 +53,20 @@ const MyAccount = props => {
                     {PURCHASE_HISTORY}
                 </AccountLink>
                 {existModuleRewardPoint && (
-                    <AccountLink onClick={handleClose} link={'/rewardpoint'}>
+                    <AccountLink
+                        onClick={handleClose}
+                        link={'/rewardpoint'}
+                        pointComponent={
+                            <InjectedComponents
+                                module={REWARDPOINT_MODULE}
+                                func={'PointHeader'}
+                                parentProps={{
+                                    classes: classes,
+                                    leftMenu: true
+                                }}
+                            />
+                        }
+                    >
                         <span className="bss-icon" />
                         {REWARD_POINT}
                     </AccountLink>

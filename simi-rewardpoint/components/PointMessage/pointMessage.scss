@@ -1,0 +1,28 @@
+.point-message {
+    padding: 10px 20px;
+    border-radius: 25px;
+    border: 2px dotted #1498d0;
+    display: inline-block;
+    margin: 1rem 1.5rem;
+    display: flex;
+    align-items: center;
+    .icon {
+        width: 20px;
+        height: 20px;
+        background-color: transparent;
+        background-image: url('./bss-icon.png');
+        background-repeat: no-repeat;
+        background-size: contain;
+        margin-right: 1rem;
+    }
+    .title {
+        background-position: left;
+        background-repeat: no-repeat;
+        background-size: 20px;
+        font-size: 0.6rem;
+        text-transform: uppercase;
+        color: #1498d0;
+        font-weight: bold;
+        line-height: 1rem;
+    }
+}
