@@ -20,7 +20,7 @@ const SearchBar = React.lazy(() =>
 );
 
 // customize
-import { REWARDPOINT_MODULE, checkPlugin } from '../../../util/checkedPlugin';
+import { REWARDPOINT_MODULE } from '../../../util/checkedPlugin';
 import InjectedComponents from '@simicart/simi-module/inject/injectedComponent';
 import { getDataFromStoreage } from '../../../util/storeData';
 require('./header.scss');
@@ -56,7 +56,6 @@ const Header = props => {
     ) : null;
 
     // customize
-    const existModuleRewardPoint = checkPlugin(REWARDPOINT_MODULE);
     const storeConfig = getDataFromStoreage('SESSION_STOREAGE', 'STORE_CONFIG');
     let sw_point_header = false;
     if (
@@ -82,7 +81,7 @@ const Header = props => {
                     hasBeenOffline={hasBeenOffline}
                     isOnline={isOnline}
                 />
-                {existModuleRewardPoint && sw_point_header ? (
+                {sw_point_header ? (
                     <InjectedComponents
                         module={REWARDPOINT_MODULE}
                         func={'PointHeader'}

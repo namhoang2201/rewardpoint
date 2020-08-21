@@ -52,7 +52,7 @@ const MyAccount = props => {
                     <HistoryIcon size={18} />
                     {PURCHASE_HISTORY}
                 </AccountLink>
-                {existModuleRewardPoint && (
+                {existModuleRewardPoint && existModuleRewardPoint.PointHeader && (
                     <AccountLink
                         onClick={handleClose}
                         link={'/rewardpoint'}

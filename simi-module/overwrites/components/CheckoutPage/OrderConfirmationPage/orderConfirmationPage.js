@@ -8,10 +8,7 @@ import CreateAccount from '@magento/venia-ui/lib/components/CheckoutPage/OrderCo
 import ItemsReview from '@magento/venia-ui/lib/components/CheckoutPage/ItemsReview';
 import defaultClasses from '@magento/venia-ui/lib/components/CheckoutPage/OrderConfirmationPage/orderConfirmationPage.css';
 // custom rewardpoint
-import {
-    REWARDPOINT_MODULE,
-    checkPlugin
-} from '../../../../util/checkedPlugin';
+import { REWARDPOINT_MODULE } from '../../../../util/checkedPlugin';
 import InjectedComponents from '@simicart/simi-module/inject/injectedComponent';
 // end customize
 const OrderConfirmationPage = props => {
@@ -60,14 +57,10 @@ const OrderConfirmationPage = props => {
         />
     ) : null;
 
-    // nam customize
-    const existModuleRewardPoint = checkPlugin(REWARDPOINT_MODULE);
-    // end customize
-
     return (
         <div className={classes.root}>
             <Title>{`Receipt - ${STORE_NAME}`}</Title>
-            {existModuleRewardPoint && isSignedIn && (
+            {isSignedIn && (
                 <InjectedComponents
                     module={REWARDPOINT_MODULE}
                     func={'RefreshPointCheckoutPage'}

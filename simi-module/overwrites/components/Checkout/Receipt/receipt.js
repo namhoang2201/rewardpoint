@@ -9,8 +9,7 @@ import defaultClasses from '@magento/venia-ui/lib/components/Checkout/Receipt/re
 
 // custom rewardpoint
 import {
-    REWARDPOINT_MODULE,
-    checkPlugin
+    REWARDPOINT_MODULE
 } from '../../../../util/checkedPlugin';
 import InjectedComponents from '@simicart/simi-module/inject/injectedComponent';
 // end customize
@@ -53,14 +52,10 @@ const Receipt = props => {
         </Fragment>
     );
 
-    // nam customize
-    const existModuleRewardPoint = checkPlugin(REWARDPOINT_MODULE);
-    // end customize
-
     return (
         <div className={classes.root}>
             <div className={classes.body}>
-                {existModuleRewardPoint && isSignedIn && (
+                {isSignedIn && (
                     <InjectedComponents
                         module={REWARDPOINT_MODULE}
                         func={'RefreshPointCheckoutPage'}

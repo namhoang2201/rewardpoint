@@ -22,14 +22,15 @@ const Routes = () => {
         <Suspense fallback={fullPageLoadingIndicator}>
             <Switch>
                 <Route>
-                    <Route exact path='/cart'>
+                    <Route exact path="/cart">
                         <CartPage />
                     </Route>
-                    <Route exact path='/checkout'>
+                    <Route exact path="/checkout">
                         <CheckoutPage />
                     </Route>
                     <Route exact path="/rewardpoint">
-                        {existModuleRewardPoint ? (
+                        {existModuleRewardPoint &&
+                        existModuleRewardPoint.MyRewardPoint ? (
                             <InjectedComponents
                                 module={REWARDPOINT_MODULE}
                                 func={'MyRewardPoint'}
@@ -40,7 +41,8 @@ const Routes = () => {
                         )}
                     </Route>
                     <Route exact path="/pointTransactions">
-                        {existModuleRewardPoint ? (
+                        {existModuleRewardPoint &&
+                        existModuleRewardPoint.AllPointTransactions ? (
                             <InjectedComponents
                                 module={REWARDPOINT_MODULE}
                                 func={'AllPointTransactions'}
@@ -51,7 +53,8 @@ const Routes = () => {
                         )}
                     </Route>
                     <Route exact path="/pointTransactionDetail/:transactionId">
-                        {existModuleRewardPoint ? (
+                        {existModuleRewardPoint &&
+                        existModuleRewardPoint.PointTransactionDetail ? (
                             <InjectedComponents
                                 module={REWARDPOINT_MODULE}
                                 func={'PointTransactionDetail'}
