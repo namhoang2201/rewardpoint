@@ -17,6 +17,7 @@ export const GET_PRODUCT_DETAIL_CUSTOM = gql`
                     product_point {
                         assign_by
                         dependent_qty
+                        point
                         message
                         receive_point
                     }

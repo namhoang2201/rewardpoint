@@ -14,11 +14,39 @@ const PointMessage = props => {
 
     const { reward_point } = talonProps;
 
-    console.log(props);
+    const [{isSignedIn}] = useUserContext();
+
+    let messagePoint = null;
     if (type === 'submit_review') {
+        if(reward_point&&
+            reward_point.hasOwnProperty('customer_point')&&
+            reward_point.customer_point.hasOwnProperty('review_point')&&
+            reward_point.customer_point.hasOwnProperty('message')
+        ){
+            if(!isSignedIn){
+                messagePoint = reward_point.customer_point.message;
+            }else{
+                messagePoint = 'Earn ' + reward_point.customer_point.message + ' points for each review';
+            }
+        }
         return <>Message Earn Point Submit Review</>;
     }
     if (type === 'product_config') {
+        if(reward_point&&
+            reward_point.hasOwnProperty('product_point')&&
+            reward_point.product_point.hasOwnProperty('assign_by')&&
+            reward_point.product_point.hasOwnProperty('dependent_qty')&&
+            reward_point.product_point.hasOwnProperty('point')&&
+            reward_point.product_point.hasOwnProperty('message')
+        ){
+            // exchange rate (assign_by = 1) or fix amount (assy_by =2)
+            if(!isSignedIn){
+                messagePoint = reward_point.product_point.message;
+            }else{
+                messagePoint = 'Earn ' + reward_point.product_point.point + ' points for 1 product item';
+            }
+            // no point (assy_by = 0) => no message
+        }
         return <>Message Earn Point Product Config</>;
     }
     return <>Message Earn Point</>;
