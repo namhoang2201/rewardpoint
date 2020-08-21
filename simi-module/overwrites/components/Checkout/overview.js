@@ -9,7 +9,7 @@ import Button from "@magento/venia-ui/lib/components/Button";
 import { Price } from "@magento/peregrine";
 import { useOverview } from "@magento/peregrine/lib/talons/Checkout/useOverview";
 // custom rewardpoint
-import { REWARDPOINT_MODULE, checkModule } from "../../../util/checkedPlugin";
+import { REWARDPOINT_MODULE, checkPlugin } from "../../../util/checkedPlugin";
 import InjectedComponents from "@simicart/simi-module/inject/injectedComponent";
 import injectedAction from "../../../inject/injectedAction";
 import { getDataFromStoreage } from "../../../util/storeData";
@@ -54,7 +54,7 @@ const Overview = (props) => {
   });
 
   // custom simi-rewardpoint
-  const existModuleRewardPoint = checkModule(REWARDPOINT_MODULE);
+  const existModuleRewardPoint = checkPlugin(REWARDPOINT_MODULE);
   const storeConfig = getDataFromStoreage("SESSION_STOREAGE", "STORE_CONFIG");
   let activeBssRewardPointModule = true;
   if (

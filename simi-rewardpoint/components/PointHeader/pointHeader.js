@@ -8,7 +8,24 @@ require('./pointHeader.scss');
 
 const PointHeader = props => {
     const { leftMenu } = props;
-    const [{ isSignedIn }] = useUserContext();
+    const [{ currentUser, isSignedIn }] = useUserContext();
+
+    if (
+        currentUser &&
+        currentUser.hasOwnProperty('reward_point') &&
+        currentUser.reward_point
+    ) {
+        const balancePoint =
+            parseInt(currentUser.reward_point.point) -
+            parseInt(currentUser.reward_point.point_expired);
+        if (leftMenu) return <>({balancePoint} Points)</>;
+        return (
+            <span className="header-point">
+                <span className="icon" />
+                <span className="title">You have {balancePoint} Points</span>
+            </span>
+        );
+    }
 
     if (!isSignedIn)
         return (

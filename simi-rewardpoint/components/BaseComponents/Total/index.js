@@ -30,7 +30,7 @@ const Total = props => {
                         <span className={props.classes.label}>{item.title}: </span>
                         <span className={props.classes.value}>
                             {item.code === 'earn_point' ?<span style={{ color: '#000000', fontWeight: 'normal' }}>{item.value}</span> : <Price currencyCode={currencyCode} value={item.value} />}
-                            {item.code === 'spend_point' && spend_points > 0 ? <span style={{ color: '#000000', fontWeight: 'normal' }}> ({spend_points} point(s))</span> : ''}
+                            {item.code === 'spend_point' && spend_points > 0 ? <span style={{ color: '#000000', fontWeight: 'normal' }}> ({spend_points} points)</span> : ''}
                         </span>
                     </div>
                 )
@@ -42,7 +42,7 @@ const Total = props => {
                             <span className={props.classes.label}>{item.title}: </span>
                             <span className={props.classes.value}>
                                 {item.code === 'earn_point' ? <span style={{ color: '#000000', fontWeight: 'normal' }}>{item.value} point(s)</span> : <Price currencyCode={currencyCode} value={item.value} />}
-                                {item.code === 'spend_point' && spend_points > 0 ? <span style={{ color: '#000000', fontWeight: 'normal' }}> ({spend_points} point(s))</span> : ''}
+                                {item.code === 'spend_point' && spend_points > 0 ? <span style={{ color: '#000000', fontWeight: 'normal' }}> ({spend_points} points)</span> : ''}
                             </span>
                         </div>
                     )

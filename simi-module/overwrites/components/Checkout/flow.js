@@ -10,13 +10,13 @@ import isObjectEmpty from '@magento/venia-ui/lib/util/isObjectEmpty';
 import Icon from '@magento/venia-ui/lib/components/Icon';
 import CheckoutButton from '@magento/venia-ui/lib/components/Checkout/checkoutButton';
 import Form from './form';
-import Receipt from '@magento/venia-ui/lib/components/Checkout/Receipt';
+import Receipt from './Receipt';
 import CREATE_CART_MUTATION from '@magento/venia-ui/lib/queries/createCart.graphql';
 
 import defaultClasses from '@magento/venia-ui/lib/components/Checkout/flow.css';
 
 // nam customize
-import {useUserContext} from '@magento/peregrine/lib/context/user';
+import { useUserContext } from '@magento/peregrine/lib/context/user';
 // end customize
 
 const ErrorIcon = <Icon src={AlertCircleIcon} attrs={{ width: 18 }} />;

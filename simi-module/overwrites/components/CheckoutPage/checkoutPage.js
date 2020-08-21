@@ -17,7 +17,7 @@ import PaymentInformation from './PaymentInformation';
 import PriceAdjustments from './PriceAdjustments';
 import ShippingMethod from '@magento/venia-ui/lib/components/CheckoutPage/ShippingMethod';
 import ShippingInformation from '@magento/venia-ui/lib/components/CheckoutPage/ShippingInformation';
-import OrderConfirmationPage from '@magento/venia-ui/lib/components/CheckoutPage/OrderConfirmationPage';
+import OrderConfirmationPage from './OrderConfirmationPage';
 import ItemsReview from '@magento/venia-ui/lib/components/CheckoutPage/ItemsReview';
 
 import CheckoutPageOperations from '@magento/venia-ui/lib/components/CheckoutPage/checkoutPage.gql.js';
