@@ -22,7 +22,9 @@ const PointMessage = props => {
             reward_point &&
             reward_point.hasOwnProperty('customer_point') &&
             reward_point.customer_point.hasOwnProperty('review_point') &&
-            reward_point.customer_point.hasOwnProperty('message')
+            reward_point.customer_point.review_point &&
+            reward_point.customer_point.hasOwnProperty('message')&&
+            reward_point.customer_point.message
         ) {
             if (!isSignedIn) {
                 messagePoint = reward_point.customer_point.message;
@@ -39,6 +41,7 @@ const PointMessage = props => {
             reward_point &&
             reward_point.hasOwnProperty('product_point') &&
             reward_point.product_point.hasOwnProperty('assign_by') &&
+            reward_point.product_point.assign_by &&
             reward_point.product_point.hasOwnProperty('dependent_qty') &&
             reward_point.product_point.hasOwnProperty('point') &&
             reward_point.product_point.hasOwnProperty('message')
