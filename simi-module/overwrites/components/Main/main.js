@@ -24,7 +24,7 @@ const Main = (props) => {
   useScrollLock(isMasked);
 
   const existModuleRewardPoint = checkPlugin(REWARDPOINT_MODULE);
-  console.log(existModuleRewardPoint)
+
   return existModuleRewardPoint && existModuleRewardPoint.CustomMain ? (
     <InjectedComponents
       module={REWARDPOINT_MODULE}
