@@ -46,6 +46,7 @@
     font-size: 1rem;
     padding: 2px;
     border: 1px solid gray;
+    width: 70%;
   }
   .rwform button {
     border: 1px solid rgb(170, 170, 170);
